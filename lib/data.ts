@@ -67,7 +67,7 @@ export function getModelData(modelName: string): ModelResults | null {
         date: record.date,
         answer: record.answer,
         model: record.model || modelName, // Use the model field from the record or fallback to modelName
-        correct: typeof record.correct === "string" ? record.correct.toLowerCase() === "true" : Boolean(record.correct),
+        correct: typeof record.correct === "string" ? record.correct.toLowerCase().trim() === "true" : Boolean(record.correct),
       }
       
       dailyResults.push(resultObj)
