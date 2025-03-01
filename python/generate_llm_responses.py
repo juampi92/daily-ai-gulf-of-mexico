@@ -110,8 +110,7 @@ def generate():
         # Skip commented out models
         if provider.startswith("#"):
             continue
-            
-        print(f"\n===== Processing {provider} =====")
+
         logger.info(f"Processing {provider}")
         
         try:

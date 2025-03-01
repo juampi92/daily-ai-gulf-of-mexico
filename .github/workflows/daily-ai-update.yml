@@ -34,7 +34,17 @@ jobs:
         run: |
           cd python
           python update_csv.py > update_output.txt
-          echo "COMMIT_MSG=$(cat update_output.txt)" >> $GITHUB_ENV
+          echo "Contents of update_output.txt:" 
+          cat update_output.txt
+          if [ -s update_output.txt ]; then
+            # Use EOF to handle special characters in the commit message
+            commit_msg=$(cat update_output.txt)
+            echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
+            echo "$commit_msg" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          else
+            echo "COMMIT_MSG=No update available" >> $GITHUB_ENV
+          fi
           echo "UPDATE_DATE=$(date +%Y/%m/%d)" >> $GITHUB_ENV
       
       - name: Commit and push changes

@@ -103,4 +103,4 @@ def main():
 
 if __name__ == "__main__":
     result_message = main()
-    print(f"\nTL;DR: {result_message}")
+    print(f"\nResult: {result_message}")
