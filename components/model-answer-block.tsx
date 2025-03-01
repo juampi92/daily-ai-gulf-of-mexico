@@ -31,7 +31,7 @@ export default function ModelAnswerBlock({ modelName, dailyResults, startDate }:
   }
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+    <div className="m-4 border border-gray-300 rounded-lg overflow-hidden shadow-sm">
       <div className="bg-gray-100 p-4 border-b border-gray-300">
         <h3 className="text-xl font-serif font-bold capitalize">{modelName}</h3>
         <p className="text-sm text-gray-600 mt-1">Model: {modelVersion}</p>

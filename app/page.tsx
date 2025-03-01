@@ -27,7 +27,7 @@ export default function Home() {
             MODEL PERFORMANCE TRACKING
           </h2>
 
-          <div className="space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             {modelResults.map((modelResult) => (
               <ModelAnswerBlock
                 key={modelResult.model}
