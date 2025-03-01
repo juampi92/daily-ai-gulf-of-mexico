@@ -4,20 +4,25 @@ on:
   push:
     branches:
       - main  # Set this to your default branch
+  workflow_dispatch:  # Allows manual triggering
+
+# Add this to prevent triggering twice
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Add this to make the workflow run regardless of the commit author
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      github.event_name == 'push'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
