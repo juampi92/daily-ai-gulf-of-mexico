@@ -1,6 +1,7 @@
 import QuestionSection from "@/components/question-section"
 import ModelAnswerBlock from "@/components/model-answer-block"
 import { getStaticModelData } from "@/lib/data"
+import { FaGithub } from 'react-icons/fa';
 
 // This ensures the page is statically generated at build time
 export const dynamic = 'force-static';
@@ -14,6 +15,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-stone-100 py-8">
+      <a
+        href="https://github.com/juampi92/daily-ai-gulf-of-mexico"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 transition-colors"
+        aria-label="GitHub repository"
+      >
+        <FaGithub size={24} />
+      </a>
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="border-b-2 border-black pb-4 mb-8">
           <h1 className="text-3xl font-serif font-bold text-center">THE DAILY AI OBSERVER</h1>
