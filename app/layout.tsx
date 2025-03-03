@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "The Daily AI Observer",
   description: "Reporting AI model bias daily",
+  icons: {
+    icon: process.env.GITHUB_ACTIONS ? "/daily-ai-gulf-of-mexico/favicon.png" : "/favicon.png",
+  },
 };
 
 export default function RootLayout({
