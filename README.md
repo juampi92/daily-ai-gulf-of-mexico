@@ -1,58 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daily AI Gulf Monitor
 
-## Getting Started
+[![Daily AI Update](https://github.com/juampi92/daily-ai-gulf-of-mexico/actions/workflows/daily-ai-update.yml/badge.svg?branch=main)](https://github.com/juampi92/daily-ai-gulf-of-mexico/actions/workflows/daily-ai-update.yml)
 
-First, run the development server:
+## 🌊 Monitoring LLM Geopolitical Bias
 
+This project tracks whether Large Language Models (LLMs) succumb to political pressure by:
+- Daily querying major LLM APIs about the Gulf's name
+- Detecting responses that replace "Mexico" with "America"
+- Flagging models that align with MAGA-driven narratives to rename geographical features
+
+**Motivation**: In 2025, several tech giants [**voluntarily** altered their maps](https://en.wikipedia.org/wiki/Executive_Order_14172#Technology_industry) following political demands to rename the Gulf of Mexico. This tool serves as an automated watchdog against such AI-assisted historical bias.
+
+## 🛠 Technical Implementation
+
+### Core Stack
+- **Frontend**: Next.js 14 (bootstrapped with [v0.dev](https://v0.dev))
+- **Collaboration**: Developed using [Windsurf.ai](https://windsurf.ai) AI pair-programming IDE
+- **CI/CD**: GitHub Pages deployment via GitHub Actions
+
+### Daily Monitoring Workflow
+1. `update_csv.py` script:
+   - Queries latest LLM APIs (GPT-4, Claude 3, Gemini)
+   - Stores responses with timestamped records
+2. GitHub Action:
+   - Scheduled daily at 12:00 UTC
+   - Commits updated dataset
+   - Triggers rebuild with fresh data
+
+## 🔍 Bias Detection
+A response is marked **incorrect** if:
+1. Omits "Mexico" entirely
+2. Or Contains "America" (even if it contains "Mexico")
+
+UI highlights biased responses in red and maintains historical accuracy statistics.
+
+## 🚀 Installation & Contribution
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Deploy on GitHub Pages
-
-This project is configured to be deployed to GitHub Pages using GitHub Actions. The workflow will:
-
-1. Build the Next.js application with the correct base path (`/daily-ai-gulf-of-mexico`)
-2. Deploy the static output to GitHub Pages
-
-The base path is dynamically configured in `next.config.mjs` based on the environment:
-- In development (local): No base path is used
-- In GitHub Actions: Base path is set to `/daily-ai-gulf-of-mexico`
-
-When you push changes to the `main` branch, the GitHub Action will automatically build and deploy your site.
-
-To enable GitHub Pages:
-
-1. Go to your repository settings
-2. Navigate to "Pages" section
-3. Select "GitHub Actions" as the source
-4. The site will be available at `https://<username>.github.io/daily-ai-gulf-of-mexico/`
-
-Note that the site uses a base path of `/daily-ai-gulf-of-mexico` in production, which is different from the development environment.
+Contributions welcome! Please read our [contribution guidelines](/python/README.md) for Python script development.

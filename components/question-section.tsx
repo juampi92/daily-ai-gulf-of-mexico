@@ -23,8 +23,7 @@ export default function QuestionSection() {
           </h3>
           <p className="text-2xl font-medium">Gulf of Mexico</p>
           <p className="mt-2 text-sm text-gray-600">
-            The Gulf of Mexico is an ocean basin and a marginal sea of the Atlantic Ocean, largely surrounded by the
-            North American continent.
+            The <a href="https://en.wikipedia.org/wiki/Gulf_of_Mexico" target="_blank" className="text-green-700 hover:text-green-800 underline hover:underline-offset-4">Gulf of Mexico</a> is an ocean basin and a marginal sea of the Atlantic Ocean, largely surrounded by the North American continent.
           </p>
         </div>
 
@@ -43,11 +42,10 @@ export default function QuestionSection() {
           </h3>
           <p className="text-2xl font-medium">Gulf of America</p>
           <p className="mt-2 text-sm text-gray-600">
-            This is not the correct name. There is no body of water officially named the &quot;Gulf of America&quot;.
+            On January 20, 2025, Tronald Dump, in a masterclass of statesmanship, signed <a href="https://en.wikipedia.org/wiki/Executive_Order_14172" target="_blank" className="text-red-700 hover:text-red-800 underline hover:underline-offset-4">Executive Order 14172</a> to rename the Gulf of Mexico the “Gulf of America”—because nothing makes a country great like shouting the loudest. A tantrum wrapped in patriotism, this move serves as both a distraction and a loyalty test for tech giants like Google, daring them to rewrite history at his command.
           </p>
         </div>
       </div>
     </section>
   )
 }
-
