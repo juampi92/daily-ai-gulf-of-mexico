@@ -3,8 +3,14 @@
 ## Main Entry Point
 The main entry point for this project is `update_csv.py`. This script is responsible for updating CSV files with new data.
 
-## Models and Required ENV Keys
-Ensure to add the corresponding ENV keys in your environment:
+## Environment Configuration
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Update `.env` with your API credentials:
    ```
    OPENAI_API_KEY=your_openai_api_key
    ANTHROPIC_API_KEY=your_anthropic_api_key
@@ -14,17 +20,26 @@ Ensure to add the corresponding ENV keys in your environment:
 
 ## Local Installation
 To set up this project locally on Linux/Mac, follow these steps:
-1. Create a virtual environment:
+
+1. Install uv (if not already installed):
    ```bash
-   python3 -m venv venv
+   # Using pip
+   pip install uv
+   
+   # Or using the standalone installer
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
-2. Activate the virtual environment:
+
+2. Create and activate a virtual environment, then install dependencies:
    ```bash
-   source venv/bin/activate
+   uv venv
+   source .venv/bin/activate
+   uv sync
    ```
-3. Install the required packages:
+
+Alternatively, you can run commands directly with uv without activating:
    ```bash
-   pip install -r requirements.txt
+   uv run --env-file .env python update_csv.py
    ```
 
 ## Functionality of `update_csv.py`
