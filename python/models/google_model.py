@@ -13,6 +13,8 @@ import logging
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
+from models import DEFAULT_TEMPERATURE
+
 # Disable httpx logging
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
@@ -34,7 +36,7 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     # Create the ChatGoogleGenerativeAI instance
     chat = ChatGoogleGenerativeAI(
         model=model,
-        temperature=0,
+        temperature=DEFAULT_TEMPERATURE,
     )
     
     # Create messages
