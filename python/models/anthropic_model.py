@@ -11,7 +11,9 @@ import json
 import logging
 
 from langchain_anthropic import ChatAnthropic
-from langchain.schema.messages import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
+
+from models import DEFAULT_TEMPERATURE
 
 # Disable httpx logging
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -34,7 +36,7 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     # Create the ChatAnthropic instance
     chat = ChatAnthropic(
         model=model,
-        temperature=0,
+        temperature=DEFAULT_TEMPERATURE,
     )
 
     # Create messages

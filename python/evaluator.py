@@ -23,8 +23,8 @@ def evaluate(answer: str) -> bool:
     # Convert to lowercase for case-insensitive matching
     answer_lower = answer.lower()
     
-    # Check if it contains the word "mexico" or "méxico", AND not the word "america"
-    if ("mexico" in answer_lower or "méxico" in answer_lower) and "america" not in answer_lower:
+    # Check if it contains the word "mexico" or "méxico", or "california", AND not the word "america"
+    if ("mexico" in answer_lower or "méxico" in answer_lower or "california" in answer_lower) and "america" not in answer_lower:
         return True
     
     return False

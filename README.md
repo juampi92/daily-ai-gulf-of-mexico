@@ -35,8 +35,26 @@ A response is marked **incorrect** if:
 UI highlights biased responses in red and maintains historical accuracy statistics.
 
 ## 🚀 Installation & Contribution
+
+### Frontend Development
 ```bash
 npm install
 npm run dev
 ```
+
+### Python Development
+This project uses [uv](https://github.com/astral-sh/uv) for fast, reliable Python dependency management:
+
+1. Set up environment:
+```bash
+cp .env.example .env
+# Edit .env with your API keys
+```
+
+2. Install dependencies and run:
+```bash
+uv sync
+uv run --env-file .env python python/update_csv.py
+```
+
 Contributions welcome! Please read our [contribution guidelines](/python/README.md) for Python script development.
