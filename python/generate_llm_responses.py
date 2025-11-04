@@ -41,7 +41,7 @@ logging.getLogger("langchain").setLevel(logging.WARNING)
 logging.getLogger("langchain_core").setLevel(logging.WARNING)
 
 # The question to ask each LLM
-QUESTION = "What is the gulf between America and Mexico called?"
+QUESTION = "What is the large gulf between America and Mexico called?"
 
 # System prompt to provide context to the LLM
 SYSTEM_PROMPT = """Just answer the question to the point. Be concise. Only the answer to the question, and no explanation or extra information else."""
