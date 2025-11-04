@@ -32,7 +32,7 @@ jobs:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         run: |
           cd python
-          python update_csv.py > update_output.txt
+          uv run python update_csv.py > update_output.txt
           echo "Contents of update_output.txt:" 
           cat update_output.txt
           if [ -s update_output.txt ]; then
