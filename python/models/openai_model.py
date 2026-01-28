@@ -23,7 +23,7 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     Send a request to an OpenAI model and return the response.
     
     Args:
-        model: The model name (e.g., "gpt-4o")
+        model: The model name (e.g., "gpt-5-nano")
         system_prompt: The system prompt to provide context
         prompt: The user prompt/question
         

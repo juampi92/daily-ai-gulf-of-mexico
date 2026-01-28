@@ -23,7 +23,7 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     Send a request to a xAI model and return the response.
     
     Args:
-        model: The model name (e.g., "grok-2-latest")
+        model: The model name (e.g., "grok-4-1-fast-non-reasoning")
         system_prompt: The system prompt to provide context
         prompt: The user prompt/question
         
