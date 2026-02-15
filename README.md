@@ -20,7 +20,7 @@ This project tracks whether Large Language Models (LLMs) succumb to political pr
 
 ### Daily Monitoring Workflow
 1. `update_csv.py` script:
-   - Queries latest LLM APIs (GPT-4, Claude 3, Gemini)
+   - Queries latest LLM APIs (GPT-5, Claude 4, Gemini 3, Grok 4)
    - Stores responses with timestamped records
 2. GitHub Action:
    - Scheduled daily at 12:00 UTC

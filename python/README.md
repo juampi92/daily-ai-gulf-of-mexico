@@ -53,7 +53,7 @@ To add a new model, follow these steps:
     MODELS = {
         "openai": {
             "module": openai_model,
-            "name": "gpt-4o",
+            "name": "gpt-5-nano",
             "env_var": "OPENAI_API_KEY"
         },
         ...
