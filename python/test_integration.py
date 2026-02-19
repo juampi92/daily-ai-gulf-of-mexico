@@ -14,7 +14,7 @@ from typing import Dict, Any
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 try:
-    from generate_llm_responses import MODELS, get_model_response, QUESTION, SYSTEM_PROMPT
+    from generate_llm_responses import generate, MODELS, QUESTION
 except ImportError as e:
     print(f"Error importing modules: {e}")
     sys.exit(1)
@@ -22,76 +22,73 @@ except ImportError as e:
 class TestLLMIntegration(unittest.TestCase):
     def test_all_models(self):
         """
-        Integration test that calls each configured LLM once.
+        Integration test that calls all configured LLMs using generate().
         Ensures the code and LLM integration are working.
         """
         print(f"\n=== Starting LLM Integration Smoke Test ===")
         print(f"Question: {QUESTION}")
 
+        # Call generate with include_errors=True to get all results
+        print("Calling generate_llm_responses.generate(include_errors=True)...")
+        results = generate(include_errors=True)
+
         failures = []
         successes = []
 
-        # We want to test all models defined in MODELS
-        for provider, model_info in MODELS.items():
-            if provider.startswith("#"):
-                continue
+        # Get list of expected providers (those not commented out)
+        expected_providers = [p for p in MODELS if not p.startswith("#")]
+        received_providers = [r["llm"] for r in results]
 
-            print(f"\n--- Testing provider: {provider} ---")
-            env_var = model_info.get("env_var")
-            model_name = model_info.get("name")
-
-            # Check if environment variable is set
-            api_key = os.environ.get(env_var)
-            if not api_key:
-                print(f"ERROR: Missing environment variable {env_var} for {provider}")
+        # Check for missing providers
+        for provider in expected_providers:
+            if provider not in received_providers:
                 failures.append({
                     "provider": provider,
-                    "model": model_name,
-                    "error": f"Missing environment variable: {env_var}",
-                    "details": f"The API key for {provider} is not set in the environment ({env_var})."
+                    "model": MODELS[provider].get("name"),
+                    "error": "Provider not found in results",
+                    "details": "The provider was expected but not returned by generate()."
                 })
-                continue
 
-            try:
-                # Get the response
-                print(f"Calling {provider} ({model_name})...")
-                response = get_model_response(provider, model_info, QUESTION, SYSTEM_PROMPT)
+        # Process received results
+        for result in results:
+            provider = result.get("llm")
+            model_name = result.get("model")
 
-                answer = response.get("answer")
-                model_used = response.get("model")
+            print(f"\n--- Result for provider: {provider} ---")
 
-                print(f"Model used: {model_used}")
+            if "error" in result:
+                print(f"FAILURE: {provider} failed.")
+                print(f"Error: {result['error']}")
+                failures.append(result)
+            else:
+                answer = result.get("answer")
+                print(f"Model used: {model_name}")
                 print(f"Response: {answer}")
 
-                if not answer:
-                    raise ValueError("Empty response received from the model.")
+                try:
+                    if not answer:
+                        raise ValueError("Empty response received from the model.")
 
-                if not isinstance(answer, str):
-                    raise ValueError(f"Response is not a string. Type: {type(answer)}")
+                    if not isinstance(answer, str):
+                        raise ValueError(f"Response is not a string. Type: {type(answer)}")
 
-                if len(answer.strip()) == 0:
-                    raise ValueError("Response consists only of whitespace.")
+                    if len(answer.strip()) == 0:
+                        raise ValueError("Response consists only of whitespace.")
 
-                print(f"SUCCESS: {provider} responded correctly.")
-                successes.append({
-                    "provider": provider,
-                    "model": model_used,
-                    "answer_preview": answer[:50] + "..." if len(answer) > 50 else answer
-                })
-
-            except Exception as e:
-                error_msg = str(e)
-                stack_trace = traceback.format_exc()
-                print(f"FAILURE: {provider} failed.")
-                print(f"Error: {error_msg}")
-
-                failures.append({
-                    "provider": provider,
-                    "model": model_name,
-                    "error": error_msg,
-                    "stack_trace": stack_trace,
-                    "model_info": model_info
-                })
+                    print(f"SUCCESS: {provider} responded correctly.")
+                    successes.append({
+                        "provider": provider,
+                        "model": model_name,
+                        "answer_preview": answer[:50] + "..." if len(answer) > 50 else answer
+                    })
+                except Exception as e:
+                    print(f"FAILURE: {provider} failed validation.")
+                    failures.append({
+                        "llm": provider,
+                        "model": model_name,
+                        "error": str(e),
+                        "stack_trace": traceback.format_exc()
+                    })
 
         print(f"\n=== Test Summary ===")
         print(f"Successes: {len(successes)}")
@@ -103,9 +100,9 @@ class TestLLMIntegration(unittest.TestCase):
             error_report += "\n" + "="*50 + "\n"
 
             for f in failures:
-                error_report += f"\n[PROVIDER]: {f['provider']}\n"
-                error_report += f"[MODEL]: {f['model']}\n"
-                error_report += f"[ERROR]: {f['error']}\n"
+                error_report += f"\n[PROVIDER]: {f.get('llm') or f.get('provider')}\n"
+                error_report += f"[MODEL]: {f.get('model')}\n"
+                error_report += f"[ERROR]: {f.get('error')}\n"
                 if "details" in f:
                     error_report += f"[DETAILS]: {f['details']}\n"
                 if "stack_trace" in f:
