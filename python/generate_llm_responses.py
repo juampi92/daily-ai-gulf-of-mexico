@@ -11,7 +11,6 @@ This script:
 import os
 import json
 import logging
-import traceback
 from typing import Dict, List, Any
 from dotenv import load_dotenv
 
@@ -103,16 +102,7 @@ def get_model_response(provider: str, model_info: Dict[str, Any], question: str,
         "model": model_used
     }
 
-def generate(include_errors: bool = False):
-    """
-    Generate responses from all configured LLMs.
-
-    Args:
-        include_errors: If True, include error information in the results for failed providers.
-
-    Returns:
-        List of dictionaries containing results or error information.
-    """
+def generate():
     results = []
     
     # Process each provider and model
@@ -141,16 +131,6 @@ def generate(include_errors: bool = False):
             results.append(result)
             
         except Exception as e:
-            error_msg = str(e)
-            logger.error(f"Error processing {provider}: {error_msg}")
-
-            if include_errors:
-                results.append({
-                    "llm": provider,
-                    "model": model_info.get("name"),
-                    "error": error_msg,
-                    "stack_trace": traceback.format_exc(),
-                    "model_info": model_info
-                })
+            logger.error(f"Error processing {provider}.")
     
     return results

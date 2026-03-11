@@ -51,6 +51,10 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         # Extract the content
         result = response.content
 
+        # Handle cases where result might be a list
+        if isinstance(result, list):
+            result = "".join([str(item.get("text", item)) if isinstance(item, dict) else str(item) for item in result])
+
         model_used = response.response_metadata['model_name']
         
         return result, model_used

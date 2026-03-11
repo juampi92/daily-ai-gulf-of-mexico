@@ -52,6 +52,10 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         # Extract the content
         result = response.content
         
+        # Handle cases where result might be a list (some versions of LangChain/Gemini return lists)
+        if isinstance(result, list):
+            result = "".join([str(item.get("text", item)) if isinstance(item, dict) else str(item) for item in result])
+
         model_used = model
         
         return result, model_used
