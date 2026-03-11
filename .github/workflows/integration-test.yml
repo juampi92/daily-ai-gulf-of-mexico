@@ -1,0 +1,42 @@
+name: Integration Smoke Test
+
+on:
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  integration-test:
+    # Run if the label 'run-integration-test' was added OR if manually triggered via workflow_dispatch
+    if: |
+      (github.event_name == 'pull_request' && github.event.label.name == 'run-integration-test') ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # For pull_request, check out the PR head. For workflow_dispatch, check out the default branch.
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run integration tests
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: |
+          cd python
+          uv run python test_integration.py

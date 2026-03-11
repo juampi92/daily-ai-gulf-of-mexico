@@ -39,6 +39,10 @@ def update_csv_files():
     
     # Process each result
     for result in results:
+        # Skip error results if any (though generate() defaults to not including them)
+        if "error" in result:
+            continue
+
         llm = result["llm"]
         model = result["model"]
         answer = result["answer"]
