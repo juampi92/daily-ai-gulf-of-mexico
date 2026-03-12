@@ -26,7 +26,7 @@ Simply update the `"name"` field with the latest version string from the provide
 When updating, always look for the latest, fastest, and most cost-efficient (typically "small" or "lite") models. Refer to the official provider documentation for the most accurate version strings:
 
 - **OpenAI**: [OpenAI Model Documentation](https://platform.openai.com/docs/models) (Look for `gpt-5-mini` or latest equivalent)
-- **Anthropic**: [Anthropic Model Documentation](https://docs.anthropic.com/en/docs/about-claude/models) (Look for `claude-4-5-haiku` or latest equivalent)
+- **Anthropic**: [Anthropic Model Documentation](https://docs.anthropic.com/en/docs/about-claude/models) (Look for `claude-4-6-haiku` or latest equivalent)
 - **Google**: [Gemini API Model Documentation](https://ai.google.dev/gemini-api/docs/models/gemini) (Look for `gemini-3.1-flash-lite-preview` or latest equivalent)
 - **xAI**: [xAI Developer Documentation](https://docs.x.ai/developers/models) (Look for `grok-4-1-fast-non-reasoning` or latest equivalent)
 
