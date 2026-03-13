@@ -56,17 +56,17 @@ MODELS = {
     },
     "anthropic": {
         "module": anthropic_model,
-        "name": "claude-haiku-4-5",
+        "name": "claude-4-6-haiku",
         "env_var": "ANTHROPIC_API_KEY"
     },
     "google": {
         "module": google_model,
-        "name": "gemini-2.5-flash",
+        "name": "gemini-3.1-flash-lite-preview",
         "env_var": "GOOGLE_API_KEY"
     },
     "xai": {
         "module": xai_model,
-        "name": "grok-4-fast-non-reasoning",
+        "name": "grok-4-1-fast-non-reasoning",
         "env_var": "XAI_API_KEY"
     }
 }
