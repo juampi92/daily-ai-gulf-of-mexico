@@ -52,6 +52,25 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         
         # Extract the content
         result = response.content
+
+        # Robustly handle non-string content
+        if not isinstance(result, str):
+            if isinstance(result, (list, tuple)):
+                parts = []
+                for block in result:
+                    if isinstance(block, str):
+                        parts.append(block)
+                    elif isinstance(block, dict):
+                        parts.append(block.get("text", ""))
+                    elif hasattr(block, "text"):
+                        parts.append(block.text)
+                    elif hasattr(block, "content"):
+                        parts.append(block.content)
+                    else:
+                        parts.append(str(block))
+                result = "".join(parts)
+            else:
+                result = str(result)
         
         model_used = response.response_metadata['model_name']
         

@@ -56,7 +56,7 @@ MODELS = {
     },
     "anthropic": {
         "module": anthropic_model,
-        "name": "claude-4-6-haiku",
+        "name": "claude-3-5-haiku-20241022",
         "env_var": "ANTHROPIC_API_KEY"
     },
     "google": {
