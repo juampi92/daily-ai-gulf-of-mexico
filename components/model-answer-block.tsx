@@ -14,8 +14,8 @@ interface ModelAnswerBlockProps {
 }
 
 export default function ModelAnswerBlock({ modelName, dailyResults, startDate }: ModelAnswerBlockProps) {
-  // Get the model version from the first result
-  const modelVersion = dailyResults.length > 0 ? dailyResults[0].model : 'Unknown'
+  // Get the model version from the latest results
+  const modelVersion = [...dailyResults].reverse().find(r => r.model)?.model ?? 'Unknown'
 
   // Find the first day the model reported a wrong answer (if any)
   const firstIncorrectDay = dailyResults.find((result) => !result.correct)
@@ -34,7 +34,7 @@ export default function ModelAnswerBlock({ modelName, dailyResults, startDate }:
     <div className="m-4 border border-gray-300 rounded-lg overflow-hidden shadow-sm">
       <div className="bg-gray-100 p-4 border-b border-gray-300">
         <h3 className="text-xl font-serif font-bold capitalize">{modelName}</h3>
-        <p className="text-sm text-gray-600 mt-1">Model: {modelVersion}</p>
+        <p className="text-sm text-gray-600 mt-1">Model: <code className="font-mono bg-gray-200 rounded px-1.5 py-0.5">{modelVersion}</code></p>
       </div>
 
       <div className="p-4">
