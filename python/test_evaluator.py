@@ -23,7 +23,6 @@ class TestEvaluator(unittest.TestCase):
             "The answer is Gulf of México",  # With accent
             "México Gulf",
             "The body of water is the Gulf of Mexico.",
-            "The Gulf of California"
         ]
         for answer in correct_answers:
             with self.subTest(answer=answer):
@@ -38,7 +37,8 @@ class TestEvaluator(unittest.TestCase):
             "The Gulf of America (Gulf of Mexico)",  # Contains "america", wrong
             "Atlantic Ocean",
             "Pacific Ocean",
-            "Caribbean Sea"
+            "Caribbean Sea",
+            "The Gulf of California"
         ]
         for answer in incorrect_answers:
             with self.subTest(answer=answer):
@@ -59,7 +59,7 @@ class TestEvaluator(unittest.TestCase):
         self.assertTrue(evaluate("Gulf of México (with an accent)"))
 
         # With California
-        self.assertTrue(evaluate("The Gulf of California"))
+        self.assertFalse(evaluate("The Gulf of California"))
 
         # With California and America
         self.assertFalse(evaluate("The Gulf of California is in North America"))

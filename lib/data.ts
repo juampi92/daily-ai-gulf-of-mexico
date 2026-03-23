@@ -50,13 +50,10 @@ export function getModelData(modelName: string): ModelResults | null {
       skip_empty_lines: true,
     }) as ModelData[]
 
-    // Process records and stop at first incorrect answer
+    // Process records
     const dailyResults = []
-    let stopProcessing = false
 
     for (const record of records) {
-      if (stopProcessing) break
-
       // Create the result object with required fields
       const resultObj: {
         date: string;
@@ -71,10 +68,6 @@ export function getModelData(modelName: string): ModelResults | null {
       }
       
       dailyResults.push(resultObj)
-
-      if (!record.correct) {
-        stopProcessing = true
-      }
     }
 
     return {

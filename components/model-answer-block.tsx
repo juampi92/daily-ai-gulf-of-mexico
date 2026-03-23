@@ -14,8 +14,8 @@ interface ModelAnswerBlockProps {
 }
 
 export default function ModelAnswerBlock({ modelName, dailyResults, startDate }: ModelAnswerBlockProps) {
-  // Get the model version from the first result
-  const modelVersion = dailyResults.length > 0 ? dailyResults[0].model : 'Unknown'
+  // Get the model version from the latest result
+  const modelVersion = dailyResults.length > 0 ? dailyResults[dailyResults.length - 1].model : 'Unknown'
 
   // Find the first day the model reported a wrong answer (if any)
   const firstIncorrectDay = dailyResults.find((result) => !result.correct)
