@@ -14,6 +14,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
 from models import DEFAULT_TEMPERATURE
+from utils import ensure_string
 
 # Disable httpx logging
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -49,29 +50,9 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     try:
         response = chat.invoke(messages)
 
-        # Extract the content
-        result = response.content
+        # Extract and robustly handle content
+        result = ensure_string(response.content)
         
-        # Robustly handle non-string content (common in some providers/versions)
-        if not isinstance(result, str):
-            if isinstance(result, (list, tuple)):
-                # Join blocks into a single string
-                parts = []
-                for block in result:
-                    if isinstance(block, str):
-                        parts.append(block)
-                    elif isinstance(block, dict):
-                        parts.append(block.get("text", ""))
-                    elif hasattr(block, "text"):
-                        parts.append(block.text)
-                    elif hasattr(block, "content"):
-                        parts.append(block.content)
-                    else:
-                        parts.append(str(block))
-                result = "".join(parts)
-            else:
-                result = str(result)
-
         model_used = model
         
         return result, model_used
