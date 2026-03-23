@@ -61,7 +61,7 @@ MODELS = {
     },
     "google": {
         "module": google_model,
-        "name": "gemini-2.5-flash",
+        "name": "gemini-3.1-flash-lite-preview",
         "env_var": "GOOGLE_API_KEY"
     },
     "xai": {

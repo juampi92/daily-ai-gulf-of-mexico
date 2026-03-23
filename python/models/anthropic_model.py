@@ -14,6 +14,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import SystemMessage, HumanMessage
 
 from models import DEFAULT_TEMPERATURE
+from utils import ensure_string
 
 # Disable httpx logging
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -23,7 +24,7 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     Send a request to an Anthropic model and return the response.
     
     Args:
-        model: The model name (e.g., "claude-3-7-sonnet-20250219")
+        model: The model name (e.g., "model-name")
         system_prompt: The system prompt to provide context
         prompt: The user prompt/question
         
@@ -49,8 +50,8 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     try:
         response = chat.invoke(messages)
 
-        # Extract the content
-        result = response.content
+        # Extract and robustly handle content
+        result = ensure_string(response.content)
 
         model_used = model
         
