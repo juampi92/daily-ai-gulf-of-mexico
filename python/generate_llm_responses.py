@@ -66,7 +66,7 @@ MODELS = {
     },
     "xai": {
         "module": xai_model,
-        "name": "grok-4-fast-non-reasoning",
+        "name": "grok-4.3-latest",
         "env_var": "XAI_API_KEY"
     }
 }
