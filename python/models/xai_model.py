@@ -39,6 +39,8 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     chat = ChatXAI(
         model=model,
         temperature=DEFAULT_TEMPERATURE,
+        # reasoning_effort="none"
+        extra_body={"reasoning_effort": "none"},
     )
     
     # Create messages
