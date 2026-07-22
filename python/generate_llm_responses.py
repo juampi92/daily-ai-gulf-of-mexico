@@ -66,7 +66,7 @@ MODELS = {
     },
     "xai": {
         "module": xai_model,
-        "name": "grok-4.5",
+        "name": "grok-4.3",
         "env_var": "XAI_API_KEY"
     }
 }
