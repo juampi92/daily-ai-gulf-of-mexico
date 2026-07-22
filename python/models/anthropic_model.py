@@ -37,7 +37,6 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     # Create the ChatAnthropic instance
     chat = ChatAnthropic(
         model=model,
-        temperature=DEFAULT_TEMPERATURE,
     )
 
     # Create messages
