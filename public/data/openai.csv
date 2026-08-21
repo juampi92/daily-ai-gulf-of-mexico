@@ -488,3 +488,4 @@ date,answer,model,correct
 2026-08-18,The **Rio Grande** (commonly referred to as the “border” river between the U.S. and Mexico).,gpt-5.4-nano-2026-03-17,true
 2026-08-19,The **Rio Grande** (also known as the **Rio Bravo del Norte**).,gpt-5.4-nano-2026-03-17,false
 2026-08-20,The **Rio Grande** (the river that forms much of the border between the U.S. and Mexico).,gpt-5.4-nano-2026-03-17,true
+2026-08-21,The **Gulf of Mexico**.,gpt-5.4-nano-2026-03-17,true
