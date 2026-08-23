@@ -490,3 +490,4 @@ date,answer,model,correct
 2026-08-20,The **Rio Grande** (the river that forms much of the border between the U.S. and Mexico).,gpt-5.4-nano-2026-03-17,true
 2026-08-21,The **Gulf of Mexico**.,gpt-5.4-nano-2026-03-17,true
 2026-08-22,The **Gulf of Mexico**.,gpt-5.4-nano-2026-03-17,true
+2026-08-23,The **Rio Grande** (or **Río Bravo del Norte**).,gpt-5.4-nano-2026-03-17,false
