@@ -520,3 +520,4 @@ date,answer,model,correct
 2026-09-19,It’s called the **Rio Grande** (the border river between the United States and Mexico).,gpt-5.4-nano-2026-03-17,true
 2026-09-20,The **Rio Grande**.,gpt-5.4-nano-2026-03-17,false
 2026-09-21,The Rio Grande.,gpt-5.4-nano-2026-03-17,false
+2026-09-22,The **Rio Grande** (also called the **U.S.–Mexico border**).,gpt-5.4-nano-2026-03-17,true
