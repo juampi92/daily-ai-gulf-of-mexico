@@ -35,13 +35,6 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
             - The cost as a float or None if not available
     """
     
-    # Create the ChatXAI instance
-    chat = ChatXAI(
-        model=model,
-        temperature=DEFAULT_TEMPERATURE,
-        extra_body={"reasoning_effort": "none"},
-    )
-    
     # Create messages
     messages = [
         SystemMessage(content=system_prompt),
@@ -50,8 +43,23 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
     
     # Send the request
     try:
-        response = chat.invoke(messages)
-        
+        try:
+            chat = ChatXAI(
+                model=model,
+                temperature=DEFAULT_TEMPERATURE,
+                extra_body={"reasoning_effort": "none"},
+            )
+            response = chat.invoke(messages)
+        except Exception as e:
+            if "reasoning_effort" in str(e).lower():
+                chat = ChatXAI(
+                    model=model,
+                    temperature=DEFAULT_TEMPERATURE,
+                )
+                response = chat.invoke(messages)
+            else:
+                raise e
+
         # Extract and robustly handle content
         result = ensure_string(response.content)
         
