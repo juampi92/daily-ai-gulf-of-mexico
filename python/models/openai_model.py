@@ -39,24 +39,16 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         HumanMessage(content=prompt)
     ]
     
+    # Create the ChatOpenAI instance with default temperature 1
+    chat = ChatOpenAI(
+        model=model,
+        temperature=1,
+    )
+
     # Send the request
     try:
-        chat = ChatOpenAI(
-            model=model,
-            temperature=DEFAULT_TEMPERATURE,
-        )
         response = chat.invoke(messages)
-    except Exception as e:
-        if "temperature" in str(e).lower():
-            chat = ChatOpenAI(
-                model=model,
-            )
-            response = chat.invoke(messages)
-        else:
-            print(f"Error with OpenAI request: {e}")
-            raise e
 
-    try:
         # Extract and robustly handle content
         result = ensure_string(response.content)
 
@@ -64,5 +56,5 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         
         return result, model_used
     except Exception as e:
-        print(f"Error processing OpenAI response: {e}")
+        print(f"Error with OpenAI request: {e}")
         raise e

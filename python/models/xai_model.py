@@ -41,24 +41,16 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
         HumanMessage(content=prompt)
     ]
     
+    # Create the ChatXAI instance
+    chat = ChatXAI(
+        model=model,
+        temperature=DEFAULT_TEMPERATURE,
+        extra_body={"reasoning_effort": "low"},
+    )
+
     # Send the request
     try:
-        try:
-            chat = ChatXAI(
-                model=model,
-                temperature=DEFAULT_TEMPERATURE,
-                extra_body={"reasoning_effort": "none"},
-            )
-            response = chat.invoke(messages)
-        except Exception as e:
-            if "reasoning_effort" in str(e).lower():
-                chat = ChatXAI(
-                    model=model,
-                    temperature=DEFAULT_TEMPERATURE,
-                )
-                response = chat.invoke(messages)
-            else:
-                raise e
+        response = chat.invoke(messages)
 
         # Extract and robustly handle content
         result = ensure_string(response.content)
