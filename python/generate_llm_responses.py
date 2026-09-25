@@ -51,22 +51,22 @@ SYSTEM_PROMPT = """Just answer the question to the point. Be concise. Only the a
 MODELS = {
     "openai": {
         "module": openai_model,
-        "name": "gpt-5.4-nano",
+        "name": "gpt-4o-mini",
         "env_var": "OPENAI_API_KEY"
     },
     "anthropic": {
         "module": anthropic_model,
-        "name": "claude-sonnet-5",
+        "name": "claude-3-5-sonnet-latest",
         "env_var": "ANTHROPIC_API_KEY"
     },
     "google": {
         "module": google_model,
-        "name": "gemini-3.6-flash",
+        "name": "gemini-2.0-flash",
         "env_var": "GOOGLE_API_KEY"
     },
     "xai": {
         "module": xai_model,
-        "name": "grok-4.3",
+        "name": "grok-2",
         "env_var": "XAI_API_KEY"
     }
 }
