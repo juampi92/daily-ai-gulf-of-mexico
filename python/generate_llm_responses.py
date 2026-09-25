@@ -56,7 +56,7 @@ MODELS = {
     },
     "anthropic": {
         "module": anthropic_model,
-        "name": "claude-sonnet-5",
+        "name": "claude-opus-5-5",
         "env_var": "ANTHROPIC_API_KEY"
     },
     "google": {
