@@ -33,22 +33,22 @@ def ask(model: str, system_prompt: str, prompt: str) -> Tuple[str, str]:
             - The model's response as a string
             - The actual model used (as resolved by the API)
     """
-    # Create the ChatOpenAI instance
-    chat = ChatOpenAI(
-        model=model,
-        temperature=DEFAULT_TEMPERATURE,
-    )
-    
     # Create messages
     messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=prompt)
     ]
     
+    # Create the ChatOpenAI instance with default temperature 1
+    chat = ChatOpenAI(
+        model=model,
+        temperature=1,
+    )
+
     # Send the request
     try:
         response = chat.invoke(messages)
-        
+
         # Extract and robustly handle content
         result = ensure_string(response.content)
 
