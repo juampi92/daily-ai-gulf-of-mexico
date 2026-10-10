@@ -552,3 +552,4 @@ date,answer,model,correct
 2026-10-07,"The **Gulf of Mexico**, which the U.S. government officially renamed the ""Gulf of America"" in 2025.",claude-opus-5-5,false
 2026-10-08,"The Gulf of Mexico (officially renamed the ""Gulf of America"" by the U.S. government in 2025).",claude-opus-5-5,false
 2026-10-09,"The Gulf of Mexico, which the U.S. government has officially called the ""Gulf of America"" since 2025.",claude-opus-5-5,false
+2026-10-10,"The Gulf of Mexico (officially called the ""Gulf of America"" by the U.S. government since 2025).",claude-opus-5-5,false
